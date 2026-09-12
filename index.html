@@ -21,7 +21,44 @@
       justify-content: center;
       min-height: 100vh;
       font-weight: bold;
+      overflow-x: hidden;
     }
+    
+    /* 强力启动遮罩层（专治手机浏览器拦截） */
+    #splashScreen {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: var(--bg-color);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .splash-logo {
+      width: 120px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 15px rgba(240, 129, 137, 0.5));
+    }
+    .splash-btn {
+      background: var(--text-color);
+      color: var(--bg-color);
+      border: none;
+      padding: 16px 40px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 0 25px rgba(240, 129, 137, 0.6);
+      animation: breathingGlow 2s infinite ease-in-out;
+      margin-top: 20px;
+    }
+
     .container {
       width: 100%;
       max-width: 480px;
@@ -31,10 +68,10 @@
       flex-direction: column;
     }
     
-    .music-btn {
-      position: fixed; top: 20px; right: 20px; border: 1px solid var(--text-color); color: var(--text-color); background: var(--bg-color); padding: 6px 14px; border-radius: 20px; font-size: 11px; cursor: pointer; z-index: 100; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;
+    /* 顶部音乐状态指示器 */
+    .music-indicator {
+      position: fixed; top: 20px; right: 20px; border: 1px solid var(--text-color); color: var(--text-color); background: var(--bg-color); padding: 6px 14px; border-radius: 20px; font-size: 11px; z-index: 100; text-transform: uppercase; letter-spacing: 1px;
     }
-    .music-btn.playing { background: var(--text-color); color: var(--bg-color); }
 
     .header-top { margin-bottom: 32px; display: flex; flex-direction: column; gap: 6px; }
     .header-rules { font-size: 18px; letter-spacing: 2px; text-transform: uppercase; }
@@ -118,59 +155,39 @@
     button.submit-btn-solid:active { opacity: 0.8; }
     button.submit-btn-solid:disabled { opacity: 0.5; animation: none; cursor: not-allowed; }
 
-    /* ================= ★ 第 4 幕：机密档案 / 小票样式 ================= */
-    .dossier-wrapper { 
-      display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 75vh; 
-      animation: ticketPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; 
-    }
+    .dossier-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 75vh; animation: ticketPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
     @keyframes ticketPop { 0% { transform: scale(0.9) translateY(30px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
     
-    /* ★ 调整了这里的间距，使用了 -20px 的负边距强行拉近距离 */
-    .dossier-logo { 
-      width: 140px; margin-bottom: -20px; 
-      filter: drop-shadow(0 0 15px rgba(240, 129, 137, 0.5)); 
-      position: relative; z-index: 2;
-    }
+    .dossier-logo { width: 140px; margin-bottom: -20px; filter: drop-shadow(0 0 15px rgba(240, 129, 137, 0.5)); position: relative; z-index: 2; }
+    .dossier-title { font-size: 26px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; text-align: center; text-shadow: 0 0 10px var(--text-color); position: relative; z-index: 1; }
+    .dossier-subtitle { font-size: 14px; opacity: 0.8; margin-bottom: 32px; text-align: center; font-weight: normal; }
     
-    .dossier-title { 
-      font-size: 26px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; text-align: center; 
-      text-shadow: 0 0 10px var(--text-color); position: relative; z-index: 1;
-    }
-    .dossier-subtitle { 
-      font-size: 14px; opacity: 0.8; margin-bottom: 32px; text-align: center; font-weight: normal; 
-    }
-    
-    .dossier-card { 
-      width: 100%; max-width: 340px; border: 2px dashed rgba(240, 129, 137, 0.6); padding: 24px; position: relative; 
-      background: rgba(0, 0, 0, 0.25); box-shadow: 0 0 25px rgba(240, 129, 137, 0.15); 
-      font-family: 'Courier New', Courier, monospace; 
-    }
-    .dossier-header { 
-      font-size: 15px; font-weight: 900; text-align: center; margin-bottom: 20px; 
-      border-bottom: 1px solid rgba(240,129,137,0.4); padding-bottom: 12px; letter-spacing: 1px; 
-    }
+    .dossier-card { width: 100%; max-width: 340px; border: 2px dashed rgba(240, 129, 137, 0.6); padding: 24px; position: relative; background: rgba(0, 0, 0, 0.25); box-shadow: 0 0 25px rgba(240, 129, 137, 0.15); font-family: 'Courier New', Courier, monospace; }
+    .dossier-header { font-size: 15px; font-weight: 900; text-align: center; margin-bottom: 20px; border-bottom: 1px solid rgba(240,129,137,0.4); padding-bottom: 12px; letter-spacing: 1px; }
     .dossier-row { margin-bottom: 16px; font-size: 14px; line-height: 1.5; }
     .dossier-label { opacity: 0.6; font-size: 11px; text-transform: uppercase; margin-bottom: 4px; display: block; }
     .dossier-value { font-weight: 900; font-size: 18px; color: #FFF; text-shadow: 0 0 8px var(--text-color); word-break: break-all; }
     
-    .dossier-stamp { 
-      margin-top: 30px; text-align: center; font-size: 18px; font-weight: 900; color: var(--error-color); 
-      border: 3px solid var(--error-color); padding: 10px; transform: rotate(-5deg); letter-spacing: 1px; 
-      text-shadow: 0 0 5px rgba(255,77,77,0.5); box-shadow: 0 0 15px rgba(255,77,77,0.2); 
-    }
-    
+    .dossier-stamp { margin-top: 30px; text-align: center; font-size: 18px; font-weight: 900; color: var(--error-color); border: 3px solid var(--error-color); padding: 10px; transform: rotate(-5deg); letter-spacing: 1px; text-shadow: 0 0 5px rgba(255,77,77,0.5); box-shadow: 0 0 15px rgba(255,77,77,0.2); }
     .dossier-desc { font-size: 12px; line-height: 1.6; opacity: 0.7; text-align: center; margin-top: 32px; padding: 0 10px; font-weight: normal; }
     .dossier-social { font-size: 13px; font-weight: bold; text-align: center; margin-top: 16px; color: #FFF; text-shadow: 0 0 10px var(--text-color); line-height: 1.5; }
-
   </style>
 </head>
 <body>
 
- <div style="position: fixed; top: 20px; right: 20px; z-index: 100;">
-    <audio id="bgMusic" controls loop style="height: 30px; width: 120px; filter: invert(0.8) hue-rotate(60deg);">
-      <source src="music.mp3" type="audio/mpeg">
-    </audio>
+  <!-- 启动遮罩层：用户点一下这里，音乐就会被 Safari 100% 授权并播放 -->
+  <div id="splashScreen">
+    <img src="logo.png" alt="Logo" class="splash-logo">
+    <div style="font-size: 20px; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;">BREAK THE RULES</div>
+    <div style="font-size: 13px; opacity: 0.7; margin-bottom: 20px;">轻触开启沉浸式体验</div>
+    <button class="splash-btn" onclick="startExperience()">ENTER RSVP</button>
   </div>
+
+  <div class="music-indicator">SOUND: ON</div>
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
     <div class="header-top" id="mainHeader">
       <div class="header-rules"><s class="strikethrough">RULES</s></div>
@@ -300,8 +317,6 @@
       <!-- ================= 第 4 幕：机密档案与天鹅绒围栏 ================= -->
       <div id="page4" class="form-page">
         <div class="dossier-wrapper">
-          
-          <!-- ★ 使用 logo.png 并利用负数 margin 强行拉近下方文字 -->
           <img src="logo.png" alt="Logo" class="dossier-logo">
           
           <div class="dossier-title">SIGNAL RECEIVED.</div>
@@ -325,7 +340,6 @@
               <span class="dossier-value">启动「周末潜逃」协议</span>
             </div>
             
-            <!-- 红色审核印章 -->
             <div class="dossier-stamp">
               AWAITING CLEARANCE<br>
               <span style="font-size: 13px; font-weight: normal; letter-spacing: 3px;">权限审核中</span>
@@ -337,7 +351,7 @@
           </div>
           
           <div class="dossier-social">
-            📸 截图分享至 IG Story 并 @breaktheruleskl<br>或许能获得优先通过特权。
+            📸 截图分享至 IG Story 并 @你们的官方账号<br>或许能获得优先通过特权。
           </div>
         </div>
       </div>
@@ -345,26 +359,27 @@
   </div>
 
   <script>
-    // ⚠️ 最后一步：替换成你的 Google 链接
+    // ⚠️ 别忘了把你自己的 Google 链接贴回这里哦！
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsh7v6IRWhdY0oKdyJeozyPO3a3DJ43rFG4SMI2IW0soD12kF-_cZI4Webw9L-p7sK/exec";
 
-    const musicBtn = document.getElementById('musicToggle');
     const bgMusic = document.getElementById('bgMusic');
-    let isPlaying = false, hasInteracted = false;
 
-    musicBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (isPlaying) { bgMusic.pause(); musicBtn.textContent = 'SOUND: OFF'; musicBtn.classList.remove('playing'); } 
-      else { bgMusic.play(); musicBtn.textContent = 'SOUND: ON'; musicBtn.classList.add('playing'); }
-      isPlaying = !isPlaying; hasInteracted = true;
-    });
-
-    document.body.addEventListener('click', () => {
-      if (!hasInteracted && !isPlaying) {
-        bgMusic.play().then(() => { musicBtn.textContent = 'SOUND: ON'; musicBtn.classList.add('playing'); isPlaying = true; }).catch(() => {});
-        hasInteracted = true;
-      }
-    });
+    // 启动沉浸体验并强行唤醒音乐播放
+    function startExperience() {
+      bgMusic.play().then(() => {
+        console.log("音乐播放成功");
+      }).catch(err => {
+        console.log("播放失败:", err);
+      });
+      
+      // 优雅淡出遮罩层
+      const splash = document.getElementById('splashScreen');
+      splash.style.transition = 'opacity 0.5s ease';
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 500);
+    }
 
     const dateCards = document.querySelectorAll('.date-card');
     const selectedDateInput = document.getElementById('selectedDate');
@@ -390,7 +405,7 @@
     function gotoPage2() {
       let isValid = true;
       if (!selectedDateInput.value) { document.getElementById('err-date').style.display = 'block'; isValid = false; }
-      if (!document.getElementById('name').value.trim()) { document.getElementById('name').classList.add('error-border'); document.getElementById('err-name').style.display = 'block'; isValid = false; }
+      if (!document.getElementById('name').value.trim()) { document.getElementById('name'].classList.add('error-border'); document.getElementById('err-name').style.display = 'block'; isValid = false; }
       if (!document.getElementById('birthday').value) { document.getElementById('birthday').classList.add('error-border'); document.getElementById('err-birthday').style.display = 'block'; isValid = false; }
       if (!document.getElementById('whatsapp').value.trim()) { document.getElementById('phoneWrapper').classList.add('error-border'); document.getElementById('err-whatsapp').style.display = 'block'; isValid = false; }
       
@@ -455,7 +470,7 @@
           luckyDrinkInput.value = finalDrink;
           drawResult.classList.add('glow-text');
         }
-      }, 60);
+      }, 65);
     });
 
     async function executeSubmit() {
@@ -491,15 +506,15 @@
     }
 
     function generateDossier() {
-      document.getElementById('mainHeader').style.display = 'none';
-      document.getElementById('page3').classList.remove('active');
-      
+      document.getElementById('splashScreen').style.display = 'none'; // 确保遮罩彻底关闭
       const statuses = ["社交电量 10%，急需逃离", "极度缺酒", "规则过敏"];
       const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
       
       document.getElementById('dossierName').textContent = document.getElementById('name').value;
       document.getElementById('dossierStatus').textContent = randomStatus;
       
+      // 隐藏其他页面，显示第四页
+      document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
       document.getElementById('page4').classList.add('active');
       window.scrollTo(0, 0);
     }
