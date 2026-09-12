@@ -166,11 +166,11 @@
 </head>
 <body>
 
-  <div id="musicToggle" class="music-btn">SOUND: OFF</div>
-  <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
+ <div style="position: fixed; top: 20px; right: 20px; z-index: 100;">
+    <audio id="bgMusic" controls loop style="height: 30px; width: 120px; filter: invert(0.8) hue-rotate(60deg);">
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+  </div>
   <div class="container">
     <div class="header-top" id="mainHeader">
       <div class="header-rules"><s class="strikethrough">RULES</s></div>
